@@ -45,8 +45,8 @@ server.on("message", async (msg, rinfo) => {
   // 解析TZSP数据包
   const oRes = parseTZSP(msg);
   for (const answer of oRes.dns.answers) {
-    console.log(oRes.ipv4.sourceAddr, answer);
     const value = getValueInAnswer(answer);
+    console.log(oRes.ipv4.sourceAddr, answer.name, value);
     if (value) {
       try {
         const dbConn = await mysql.getConnection(dbPool);
@@ -57,7 +57,9 @@ server.on("message", async (msg, rinfo) => {
           value,
         });
         dbConn.release();
-      } catch (e) {}
+      } catch (e) {
+        console.error(e);
+      }
     }
   }
 });

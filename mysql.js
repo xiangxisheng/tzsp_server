@@ -60,7 +60,7 @@ module.exports.getConnection = async function (oDbPool) {
   oRet.query = async function (sql, values) {
     // 执行查询语句
     return new Promise((resolve, reject) => {
-      console.log("query:", sql, values);
+      //console.log("query:", sql, values);
       oConn.query(sql, values, (err, rows) => {
         if (err) {
           return reject(err);
