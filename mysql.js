@@ -30,6 +30,7 @@ module.exports.createPool = function (oURL) {
     config.password = oURL.password;
   }
   config.database = aPath[1];
+  config.connectionLimit = 100;
   return mysql.createPool(config);
 };
 module.exports.getConnection = async function (oDbPool) {
